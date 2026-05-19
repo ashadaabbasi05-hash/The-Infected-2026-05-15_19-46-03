@@ -132,7 +132,7 @@ public sealed class TeamAApiClient : MonoBehaviour
             yield break;
         }
 
-        if (!TryParseJson(request.downloadHandler != null ? request.downloadHandler.text : null, out T result))
+        if (!TryParseJson(GetResponseText(request), out T result))
         {
             LogFailure(path, "invalid json");
             callback?.Invoke(false, null);
@@ -180,7 +180,7 @@ public sealed class TeamAApiClient : MonoBehaviour
             yield break;
         }
 
-        if (!TryParseJson(webRequest.downloadHandler != null ? webRequest.downloadHandler.text : null, out TResponse responseData))
+        if (!TryParseJson(GetResponseText(webRequest), out TResponse responseData))
         {
             LogFailure(path, "invalid json");
             callback?.Invoke(false, null);
@@ -214,6 +214,11 @@ public sealed class TeamAApiClient : MonoBehaviour
 
             return false;
         }
+    }
+
+    static string GetResponseText(UnityWebRequest request)
+    {
+        return request != null && request.downloadHandler != null ? request.downloadHandler.text : null;
     }
 
     void LogSuccess(string path)
