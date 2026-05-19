@@ -289,8 +289,8 @@ public sealed class TeamAApiClient : MonoBehaviour
             return null;
         }
 
-        int index = UnityEngine.Random.Range(0, humanPlayers.Length);
-        return humanPlayers[index];
+        int randomHumanIndex = UnityEngine.Random.Range(0, humanPlayers.Length);
+        return humanPlayers[randomHumanIndex];
     }
 
     public static RespondResponse LocalSilentRespond(string botId)
